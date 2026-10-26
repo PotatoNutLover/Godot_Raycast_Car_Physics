@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://wujkaloo2wut"]
+
+[ext_resource type="Script" uid="uid://b1dshy2k7aeuf" path="res://RaycastCarController/car.gd" id="1_70pag"]
+[ext_resource type="PackedScene" uid="uid://bkwf40i353hx6" path="res://RaycastCarController/Models/vaz-2101.fbx" id="2_mjeap"]
+[ext_resource type="PackedScene" uid="uid://dpkaq158lyuk1" path="res://RaycastCarController/Models/vaz_2101_wheel.tscn" id="3_7tpng"]
+[ext_resource type="Script" uid="uid://4hfhucbpb02l" path="res://RaycastCarController/Scripts/car_engine.gd" id="4_4bt2c"]
+
+[sub_resource type="Curve" id="Curve_4bt2c"]
+_data = [Vector2(0, 0.55056185), 0.0, -0.80973774, 0, 0, Vector2(0.5957447, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.7191012), -0.7041199, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uj0h6"]
+size = Vector3(3.01, 0.8211035, 1.1747413)
+
+[node name="Car" type="RigidBody3D" unique_id=560620409]
+mass = 1200.0
+center_of_mass_mode = 1
+center_of_mass = Vector3(0, 0.18613249, -0.04053715)
+linear_damp = 0.1
+angular_damp = 1.5
+script = ExtResource("1_70pag")
+suspension_rest_dist = 0.25
+spring_strength = 102000.0
+spring_damping = 8800.0
+wheel_radius = 0.3
+brake_power = 5000.0
+max_steer_angle = 22.0
+rear_tire_grip = 2.8
+drift_grip_multiplier = 0.1
+slip_thereshold = 1.0
+
+[node name="CarEngine" type="Node" parent="." unique_id=1441441911]
+unique_name_in_owner = true
+script = ExtResource("4_4bt2c")
+max_torque = 115.0
+engine_breaking = 50.0
+torque_curve = SubResource("Curve_4bt2c")
+gear_ratios = Array[float]([-3.2, 0.0, 2.5, 1.8, 1.5, 1.2])
+final_drive = 12.0
+
+[node name="vaz-2101" parent="." unique_id=1678865871 instance=ExtResource("2_mjeap")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=711405]
+transform = Transform3D(-4.3711385e-08, 0, 0.99999994, 0, 1, 0, -0.99999994, 0, -4.3711385e-08, 0.004851103, 0.5951245, -2.1204849e-10)
+shape = SubResource("BoxShape3D_uj0h6")
+
+[node name="CenterOfMass" type="Marker3D" parent="." unique_id=662150646]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18613249, -0.04053715)
+
+[node name="Wheels" type="Node3D" parent="." unique_id=278204845]
+unique_name_in_owner = true
+
+[node name="Wheel_FL" type="RayCast3D" parent="Wheels" unique_id=581619740]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.45, 0.4, -1.0763297)
+
+[node name="vaz-2101_wheel" parent="Wheels/Wheel_FL" unique_id=601435648 instance=ExtResource("3_7tpng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Wheel_FR" type="RayCast3D" parent="Wheels" unique_id=778808192]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.4, -1.0763297)
+
+[node name="vaz-2101_wheel" parent="Wheels/Wheel_FR" unique_id=815583072 instance=ExtResource("3_7tpng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Wheel_RL" type="RayCast3D" parent="Wheels" unique_id=1024153210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 0.4, 0.7213943)
+
+[node name="vaz-2101_wheel" parent="Wheels/Wheel_RL" unique_id=446052803 instance=ExtResource("3_7tpng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
+
+[node name="Wheel_RR" type="RayCast3D" parent="Wheels" unique_id=848649838]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 0.4, 0.7213943)
+
+[node name="vaz-2101_wheel" parent="Wheels/Wheel_RR" unique_id=1347119041 instance=ExtResource("3_7tpng")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)

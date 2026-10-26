@@ -1,0 +1,200 @@
+[gd_scene format=3 uid="uid://2h235pvpix55"]
+
+[ext_resource type="Texture2D" uid="uid://cjeph2bytw7sy" path="res://Scenes/Textures/checkboard.png" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://cob067incge18" path="res://Scenes/main.gd" id="1_jjvhh"]
+[ext_resource type="PackedScene" uid="uid://wujkaloo2wut" path="res://RaycastCarController/Vaz2101.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://bof6mf1l1sqg1" path="res://Scenes/canvas_layer.gd" id="3_8gbba"]
+[ext_resource type="Material" uid="uid://bl3umbaimwo3i" path="res://Scenes/Materials/test_mat.tres" id="3_kry3j"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3q60g"]
+albedo_color = Color(0.4970631, 0.6349587, 0.31833497, 1)
+albedo_texture = ExtResource("1_jjgbg")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj0h6"]
+albedo_color = Color(0.5220559, 0.79148656, 0.77682596, 1)
+albedo_texture = ExtResource("1_jjgbg")
+uv1_triplanar = true
+
+[sub_resource type="Curve3D" id="Curve3D_jjvhh"]
+closed = true
+_data = {
+"points": PackedVector3Array(0.47536087, 0, -10.549799, -0.47536087, 0, 10.549799, -0.0031547546, -0.7755432, 0.024196625, 13.378933, 0, 2.7991428, -13.378933, 0, -2.7991428, -29.068123, -0.7755432, 9.228102, 13.854298, 0, 0.38753128, -13.854298, 0, -0.38753128, -46.650787, 0.2900622, 2.4452486, 12.304169, 0, -2.7127285, -12.304169, 0, 2.7127285, -62.598766, -0.7755432, 9.141687, 3.0587616, -12.183729, 18.032852, -3.0587616, 12.183729, -18.032852, -87.251144, 13.797928, -5.443104, -9.300789, 0, -0.2906494, 9.300789, 0, 0.2906494, -61.339283, -0.7755432, -19.341974, -14.048061, 0, 0.09688616, 14.048061, 0, -0.09688616, -45.80938, 0.29213738, -5.9688144, -3.5846786, 0, 4.5535097, 3.5846786, 0, -4.5535097, -28.592758, -0.7755432, -8.4910555, -5.6192236, 0, -3.2940292, 5.6192236, 0, 3.2940292, -7.859749, -0.7755432, -13.819632),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0.25193074, 0, 0, 0, 0)
+}
+point_count = 9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jjvhh"]
+albedo_color = Color(0.47700417, 0.2876257, 0, 1)
+albedo_texture = ExtResource("1_jjgbg")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_21xkr"]
+albedo_texture = ExtResource("1_jjgbg")
+
+[sub_resource type="LabelSettings" id="LabelSettings_bo1nx"]
+font_size = 29
+
+[sub_resource type="LabelSettings" id="LabelSettings_uj0h6"]
+font_size = 29
+
+[node name="Main" type="Node3D" unique_id=823811854]
+script = ExtResource("1_jjvhh")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1696417860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.22293091, 0)
+use_collision = true
+
+[node name="Ground" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1598457579]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2158318, -1.3955388, -116.85389)
+use_collision = true
+size = Vector3(135.96863, 1, 305.7921)
+material = SubResource("StandardMaterial3D_3q60g")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1874564606]
+transform = Transform3D(0.96475935, 0.26313385, 0, -0.26313385, 0.96475935, 0, 0, 0, 1, 3.272705, -0.9510584, -19.661789)
+size = Vector3(7.54541, 1.7509766, 3.2567139)
+material = SubResource("StandardMaterial3D_uj0h6")
+
+[node name="Path3D" type="Path3D" parent="CSGCombiner3D" unique_id=1237802365]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.386784, -0.7700732, 11.044685)
+curve = SubResource("Curve3D_jjvhh")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="CSGCombiner3D/Path3D" unique_id=2072211826]
+transform = Transform3D(1, 0, 0, 0, 0.225, 0, 0, 0, 1, 0, 0, 0)
+use_collision = true
+polygon = PackedVector2Array(-2.5, 0, -2, 1, 3, 1, 3.5, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = SubResource("StandardMaterial3D_jjvhh")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="CSGCombiner3D" unique_id=2060447860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.783333, -0.18724138, -28.700575)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=1162523739]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, 0)
+material_override = SubResource("StandardMaterial3D_21xkr")
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=353705217]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, 1.2052212)
+material_override = ExtResource("3_kry3j")
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=413764220]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -2.3444023)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=1934711081]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -1.1391811)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=845691548]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -4.733305)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=496972966]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -3.5280838)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=1653674644]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -7.0777073)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D" unique_id=1832015135]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -5.872486)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="CSGCombiner3D" unique_id=1171349621]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.273701, -0.18724138, -29.173517)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=439290592]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, 0)
+material_override = SubResource("StandardMaterial3D_21xkr")
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=1981086372]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, 1.2052212)
+material_override = ExtResource("3_kry3j")
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=1929500907]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -2.3444023)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=1233371179]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -1.1391811)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=1198799276]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -4.733305)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=431854991]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -3.5280838)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=30338301]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -7.0777073)
+material = ExtResource("3_kry3j")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCombiner3D2" unique_id=1962069914]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, -1.061, -5.872486)
+material = ExtResource("3_kry3j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=263741028]
+transform = Transform3D(0.8215861, 0.4183704, 0.38725036, -0.4253665, -0.0023745298, 0.9050183, 0.37955227, -0.9082735, 0.17600974, 0.9241543, 7.311208, -0.41036892)
+light_energy = 0.8
+
+[node name="Car" parent="." unique_id=560620409 instance=ExtResource("2_bo1nx")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.47727585, 0.25374758, -9.899088)
+mass = 2200.0
+center_of_mass = Vector3(0, -0.13, -0.15)
+spring_strength = 82000.0
+max_steer_angle = 32.0
+drift_grip_multiplier = 0.3
+slip_thereshold = 2.0
+
+[node name="UICanvas" type="CanvasLayer" parent="." unique_id=1966069150]
+unique_name_in_owner = true
+script = ExtResource("3_8gbba")
+
+[node name="GearLabel" type="Label" parent="UICanvas" unique_id=2060938733]
+offset_right = 152.0
+offset_bottom = 40.0
+text = "Gear: "
+label_settings = SubResource("LabelSettings_bo1nx")
+
+[node name="RPMProgressBar" type="ProgressBar" parent="UICanvas" unique_id=1119896809]
+offset_left = 4.0
+offset_top = 76.0
+offset_right = 179.0
+offset_bottom = 108.0
+max_value = 7000.0
+show_percentage = false
+
+[node name="RPMLabel" type="Label" parent="UICanvas" unique_id=629052197]
+offset_top = 32.0
+offset_right = 154.0
+offset_bottom = 72.0
+text = "RPM: "
+label_settings = SubResource("LabelSettings_uj0h6")
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=643688822]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.9429127, 0.33304003, 0, -0.33304003, 0.9429127, 0.47177052, 0.42363107, -9.950949)
+
+[node name="CarCamera" type="Camera3D" parent="CameraPivot" unique_id=1938625495]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32502913, 2.9696193)
+fov = 80.0

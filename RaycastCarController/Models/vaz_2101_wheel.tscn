@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dpkaq158lyuk1"]
+
+[ext_resource type="PackedScene" uid="uid://cve6emoh083p8" path="res://RaycastCarController/Models/vaz-2101_wheel.fbx" id="1_86tqt"]
+
+[node name="vaz-2101_wheel" unique_id=601435648 instance=ExtResource("1_86tqt")]
+
+[node name="wheel_fl" parent="." index="0" unique_id=1081290224]
+transform = Transform3D(1, 0, 7.549791e-08, 7.549791e-08, 0, -1, 0, 1, 0, 0, 0, 0)
